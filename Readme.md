@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Дарья Найдикова](https://up.htmlacademy.ru/javascript/7/user/100740).
-* Наставник: `Неизвестно`.
+* Наставник: `В гордом одиночестве`.
 
 ---
 
