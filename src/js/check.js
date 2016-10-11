@@ -1,5 +1,6 @@
-var getMessage = function (a, b) {
+'use strict';
 
+window.getMessage = function(a, b) {
   if (typeof a === 'boolean') {
     return a ? 'Переданное GIF-изображение анимировано и содержит ' + b + ' кадров' : 'Переданное GIF-изображение не анимировано';
   } else if (typeof a === 'number') {
@@ -11,7 +12,7 @@ var getMessage = function (a, b) {
     }
     return 'Общая площадь артефактов сжатия: ' + artifactsSquare + ' пикселей';
   } else if (typeof a === 'object') {
-    var amountOfRedPoints = a.reduce(function (sum, current) {
+    var amountOfRedPoints = a.reduce(function(sum, current) {
       return sum + current;
     });
     return 'Количество красных точек во всех строчках изображения: ' + amountOfRedPoints;
@@ -19,3 +20,4 @@ var getMessage = function (a, b) {
     return 'Переданы некорректные данные';
   }
 };
+
