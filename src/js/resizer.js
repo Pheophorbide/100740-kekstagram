@@ -122,11 +122,36 @@
       this._ctx.closePath();
       // Отрисовка прямоугольника, обозначающего область изображения после
       // кадрирования. Координаты задаются от центра.
-      this._ctx.strokeRect(
-          (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2,
-          (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2,
-          this._resizeConstraint.side - this._ctx.lineWidth / 2,
-          this._resizeConstraint.side - this._ctx.lineWidth / 2);
+      var positionX = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
+      var positionY = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
+      var d = 3;
+      var space = d;
+      var sphereInLine = Math.ceil((this._resizeConstraint.side - this._ctx.lineWidth / 2) / (d * 2 + space));
+      this._ctx.fillStyle = '#ffe753';
+      var drawRingsX = function(x, y) {
+        this._ctx.beginPath();
+        this._ctx.arc(x, y, d, 0, 2 * Math.PI);
+        for (var i = 0; i < sphereInLine; i++) {
+          x = x + d * 2 + space;
+          this._ctx.arc(x, y, d, 0, 2 * Math.PI);
+        }
+        this._ctx.fill();
+        this._ctx.closePath();
+      }.bind(this);
+      var drawRingsY = function(x, y) {
+        this._ctx.beginPath();
+        this._ctx.arc(x, y, d, 0, 2 * Math.PI);
+        for (var i = 0; i < sphereInLine; i++) {
+          y = y + d * 2 + space;
+          this._ctx.arc(x, y, d, 0, 2 * Math.PI);
+        }
+        this._ctx.fill();
+        this._ctx.closePath();
+      }.bind(this);
+      drawRingsX(positionX, positionY);
+      drawRingsX(positionX, -positionY - d);
+      drawRingsY(positionX, positionY);
+      drawRingsY(-positionX - d, positionY);
       //Размеры кадрируемого изображения
       this._ctx.font = '20px Arial';
       this._ctx.fillStyle = 'white';
