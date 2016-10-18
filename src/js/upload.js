@@ -261,6 +261,29 @@
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
   };
 
+  //ВАлидация элементов формы кадрирования
+
+  var left = document.querySelector('#resize-x');
+  var top = document.querySelector('#resize-y');
+  var side = document.querySelector('#resize-size');
+  var submitButton = document.querySelector('#resize-fwd');
+
+  var isFormValid = function() {
+    var summOnLeft = +left.value + +side.value;
+    var summOnTop = +top.value + +side.value;
+    if(left.value >= 0 && top.value > 0 && summOnLeft <= currentResizer._image.naturalWidth && summOnTop <= currentResizer._image.naturalHeight) {
+      submitButton.removeAttribute('disabled');
+      return true;
+    } else {
+      submitButton.setAttribute('disabled', 'disabled');
+      return false;
+    }
+  };
+
+  left.onchange = isFormValid;
+  top.onchange = isFormValid;
+  side.onchange = isFormValid;
+
   cleanupResizer();
   updateBackground();
 })();
