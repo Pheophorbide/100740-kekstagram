@@ -1,4 +1,5 @@
 /* global Resizer: true */
+/* global Cookies: true */
 
 /**
  * @fileoverview
@@ -262,6 +263,7 @@
   };
 
   //Cookies
+
   var left = document.querySelector('#resize-x');
   var top = document.querySelector('#resize-y');
   var side = document.querySelector('#resize-size');
