@@ -1,4 +1,5 @@
 /* global Resizer: true */
+/* global Cookies: true */
 
 /**
  * @fileoverview
@@ -261,12 +262,36 @@
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
   };
 
-  //ВАлидация элементов формы кадрирования
+  //Cookies
 
   var left = document.querySelector('#resize-x');
   var top = document.querySelector('#resize-y');
   var side = document.querySelector('#resize-size');
   var submitButton = document.querySelector('#resize-fwd');
+  var DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
+  var filters = document.querySelectorAll('input[name="upload-filter"]');
+  var currentDate = new Date();
+  var currentYear = currentDate.getFullYear();
+  var HopperBDay = new Date(currentYear, 11, 9);
+
+  if (currentDate < HopperBDay) {
+    HopperBDay.setFullYear(currentYear - 1);
+  }
+
+  var cookiesLifeTime = (currentDate - HopperBDay) / DAY_IN_MILLIS;
+
+  for (var i = 0; i < filters.length; i++) {
+    filters[i].onclick = function() {
+      Cookies.set('upload-filter', this.value, {
+        expires: cookiesLifeTime
+      });
+    };
+    var checkedFilter = Cookies.get('upload-filter');
+    if (filters[i].value === checkedFilter) {
+      filters[i].setAttribute('checked', 'checked');
+    }
+  }
+  //ВАлидация элементов формы кадрирования
 
   var isFormValid = function() {
     var summOnLeft = +left.value + +side.value;
