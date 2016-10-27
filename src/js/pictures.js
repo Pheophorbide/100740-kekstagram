@@ -6,6 +6,7 @@
   var template = document.querySelector('template');
   var templateContainer = 'content' in template ? template.content : template;
   var picturesContainer = document.querySelector('.pictures');
+  var pictures = [];
 
   var load = function(url, callback) {
     var callbackName = 'JSONPRequest';
@@ -39,7 +40,8 @@
     return templateItem;
   };
 
-  var renderPictures = function(pictures) {
+  var renderPictures = function(data) {
+    pictures = data;
     pictures.forEach(function(picture) {
       picturesContainer.appendChild(getTemplateItem(picture));
     });
