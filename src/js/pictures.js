@@ -2,6 +2,7 @@
 
 (function() {
   var URL = 'http://localhost:1507/api/pictures';
+  var IMAGE_LOAD_TIMEOUT = 10000;
   var filters = document.querySelector('.filters');
   var template = document.querySelector('template');
   var templateContainer = 'content' in template ? template.content : template;
@@ -29,6 +30,7 @@
     var blockImg = new Image();
     var targetImg = templateItem.querySelector('img');
     blockImg.onload = function(event) {
+      clearTimeout(blockImgTimeout);
       targetImg.src = event.target.src;
       targetImg.style.width = '182';
       targetImg.style.height = '182';
@@ -37,6 +39,10 @@
       targetImg.classList.add('picture-load-failure');
     };
     blockImg.src = item.url;
+
+    var blockImgTimeout = setTimeout(function() {
+      targetImg.classList.add('picture-load-failure');
+    }, IMAGE_LOAD_TIMEOUT);
     return templateItem;
   };
 
