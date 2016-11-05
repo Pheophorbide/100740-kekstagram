@@ -1,17 +1,18 @@
 'use strict';
+var URL = 'http://localhost:1507/api/pictures';
+var filters = document.querySelector('.filters');
+var picturesContainer = document.querySelector('.pictures');
+var picturesArray = [];
 
-define(['./load', './getTemplateElement'], function(load, getTemplateElement) {
-  var URL = 'http://localhost:1507/api/pictures';
-  var filters = document.querySelector('.filters');
-  var picturesContainer = document.querySelector('.pictures');
-  var picturesArrey = [];
-
+define(['./load', './gallery'], function(load, Gallery) {
   filters.classList.add('hidden');
 
   var renderPictures = function(data) {
-    picturesArrey = data;
-    picturesArrey.forEach(function(picture) {
-      picturesContainer.appendChild(getTemplateElement(picture));
+    picturesArray = data;
+    picturesArray.forEach(function(picture, index, array) {
+      var pictureElement = new Gallery(picture, index);
+      picturesContainer.appendChild(pictureElement.element);
+      pictureElement.setPictures(array);
     });
   };
 
