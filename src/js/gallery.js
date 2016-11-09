@@ -32,6 +32,10 @@ define(['./getTemplateElement'],
         });
         var currentNumber = picturesURL.indexOf(currentSRC[1]);
         var next = ++currentNumber;
+        if (next >= picturesURL.length) {
+          currentNumber = 0;
+          next = currentNumber++;
+        }
         self.setActivePicture(next);
       };
       this.closeButton.onclick = function() {
