@@ -1,5 +1,5 @@
 'use strict';
-var URL = 'http://localhost:1507/api/pictures?callback=';
+var URL = '//o0.github.io/assets/json/pictures.json';
 var filters = document.querySelector('.filters');
 var picturesContainer = document.querySelector('.pictures');
 var picturesArray = [];
