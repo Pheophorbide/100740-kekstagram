@@ -1,5 +1,5 @@
 'use strict';
-var URL = 'http://localhost:1507/api/pictures';
+var URL = 'https://localhost:1507/api/pictures';
 var filters = document.querySelector('.filters');
 var picturesContainer = document.querySelector('.pictures');
 var picturesArray = [];
